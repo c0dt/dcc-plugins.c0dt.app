@@ -10,29 +10,30 @@
 #include <chrono>
 #include <ctime>
 
-//コマンドのクラス MPxCommandから派生
-class testSample : public MPxCommand
+class c0dtCmdTemplate : public MPxCommand
 {
 public:
-	testSample() {};
-	~testSample() override;
+	c0dtCmdTemplate() {};
+	~c0dtCmdTemplate() override;
 	MStatus	 doIt(const MArgList& args) override;
 	static void* creator();
 
 private:
 };
 
-testSample::~testSample() {}
+c0dtCmdTemplate::~c0dtCmdTemplate() {}
 
-void* testSample::creator()
+void* c0dtCmdTemplate::creator()
 {
-	return new testSample();
+	return new c0dtCmdTemplate();
 }
 
-//コマンドで実行する内容
-MStatus testSample::doIt(const MArgList&)
+
+MStatus c0dtCmdTemplate::doIt(const MArgList&)
 {
 	MStatus status;
+
+	//****************************************************************************************************
 	// require OpenMayaAnim.lib to link
 	//MTime currentTime = MAnimControl::currentTime();
 	//double timeInFrames = currentTime.as(MTime::kFilm);
@@ -40,9 +41,8 @@ MStatus testSample::doIt(const MArgList&)
 	auto now = std::chrono::system_clock::now();
 	auto now_time_t = std::chrono::system_clock::to_time_t(now);
 
-	cout << "---------- testSample ---------- Start " << std::ctime(&now_time_t) << endl;
+	cout << "---------- c0dtCmdTemplate ---------- Start " << std::ctime(&now_time_t) << endl;
 
-	//選択中のオブジェクトの名前を出力
 	MSelectionList slist;
 	MGlobal::getActiveSelectionList( slist );
 	for (unsigned int i = 0; i < slist.length(); i++ ) {
@@ -54,17 +54,19 @@ MStatus testSample::doIt(const MArgList&)
 
 	now = std::chrono::system_clock::now();
 	now_time_t = std::chrono::system_clock::to_time_t(now);
-	cout << "---------- testSample ---------- End" << std::ctime(&now_time_t) << endl;
+	cout << "---------- c0dtCmdTemplate ---------- End" << std::ctime(&now_time_t) << endl;
+	//****************************************************************************************************
+
+
 	return status;
 }
 
-//プラグインロード時のイニシャライズ
 MStatus initializePlugin(MObject obj)
 {
 	MStatus   status;
 	MFnPlugin plugin(obj, PLUGIN_COMPANY, "1.0", "Any");
 
-	status = plugin.registerCommand("testSample", testSample::creator);
+	status = plugin.registerCommand("c0dtCmdTemplate", c0dtCmdTemplate::creator);
 	if (!status) {
 		status.perror("registerCommand");
 		return status;
@@ -73,13 +75,12 @@ MStatus initializePlugin(MObject obj)
 	return status;
 }
 
-//プラグインアンロード時のアンイニシャライズ
 MStatus uninitializePlugin(MObject obj)
 {
 	MStatus   status;
 	MFnPlugin plugin(obj);
 
-	status = plugin.deregisterCommand("testSample");
+	status = plugin.deregisterCommand("c0dtCmdTemplate");
 	if (!status) {
 		status.perror("deregisterCommand");
 		return status;

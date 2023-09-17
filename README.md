@@ -1,3 +1,5 @@
 
-Use flowing to generate project
+##### Use following to generate sample project
+`Shell
 cmake . -B.
+`

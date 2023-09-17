@@ -13,7 +13,8 @@ _deps
 /**/Debug
 /**/x64
 /**/*.dir/
-/samples/**/*.vcxproj
-/samples/**/*.vcxproj.*
-/samples/**/Project.sln
+/samples.local
 .vs
+/**/native/**/*.vcxproj
+/**/native/**/*.vcxproj.*
+/**/native/**/Project.sln
