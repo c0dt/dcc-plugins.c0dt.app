@@ -10,26 +10,26 @@
 #include <chrono>
 #include <ctime>
 
-class c0dt{{PLUGIN_NAME}} : public MPxCommand
+class c0dtPlayground : public MPxCommand
 {
 public:
-	c0dt{{PLUGIN_NAME}}() {};
-	~c0dt{{PLUGIN_NAME}}() override;
+	c0dtPlayground() {};
+	~c0dtPlayground() override;
 	MStatus	 doIt(const MArgList& args) override;
 	static void* creator();
 
 private:
 };
 
-c0dt{{PLUGIN_NAME}}::~c0dt{{PLUGIN_NAME}}() {}
+c0dtPlayground::~c0dtPlayground() {}
 
-void* c0dt{{PLUGIN_NAME}}::creator()
+void* c0dtPlayground::creator()
 {
-	return new c0dt{{PLUGIN_NAME}}();
+	return new c0dtPlayground();
 }
 
 
-MStatus c0dt{{PLUGIN_NAME}}::doIt(const MArgList&)
+MStatus c0dtPlayground::doIt(const MArgList&)
 {
 	MStatus status;
 
@@ -41,7 +41,7 @@ MStatus c0dt{{PLUGIN_NAME}}::doIt(const MArgList&)
 	auto now = std::chrono::system_clock::now();
 	auto now_time_t = std::chrono::system_clock::to_time_t(now);
 
-	cout << "---------- c0dt{{PLUGIN_NAME}} ---------- Start " << std::ctime(&now_time_t) << endl;
+	cout << "---------- c0dtPlayground ---------- Start " << std::ctime(&now_time_t) << endl;
 
 	MSelectionList slist;
 	MGlobal::getActiveSelectionList( slist );
@@ -54,7 +54,7 @@ MStatus c0dt{{PLUGIN_NAME}}::doIt(const MArgList&)
 
 	now = std::chrono::system_clock::now();
 	now_time_t = std::chrono::system_clock::to_time_t(now);
-	cout << "---------- c0dt{{PLUGIN_NAME}} ---------- End" << std::ctime(&now_time_t) << endl;
+	cout << "---------- c0dtPlayground ---------- End" << std::ctime(&now_time_t) << endl;
 	//****************************************************************************************************
 
 
@@ -66,7 +66,7 @@ MStatus initializePlugin(MObject obj)
 	MStatus   status;
 	MFnPlugin plugin(obj, PLUGIN_COMPANY, "1.0", "Any");
 
-	status = plugin.registerCommand("c0dt{{PLUGIN_NAME}}", c0dt{{PLUGIN_NAME}}::creator);
+	status = plugin.registerCommand("c0dtPlayground", c0dtPlayground::creator);
 	if (!status) {
 		status.perror("registerCommand");
 		return status;
@@ -80,7 +80,7 @@ MStatus uninitializePlugin(MObject obj)
 	MStatus   status;
 	MFnPlugin plugin(obj);
 
-	status = plugin.deregisterCommand("c0dt{{PLUGIN_NAME}}");
+	status = plugin.deregisterCommand("c0dtPlayground");
 	if (!status) {
 		status.perror("deregisterCommand");
 		return status;

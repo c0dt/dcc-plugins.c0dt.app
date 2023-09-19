@@ -4,11 +4,11 @@ cmake_minimum_required(VERSION 2.8)
 include($ENV{DEVKIT_LOCATION}/cmake/pluginEntry.cmake)
 
 # specify project name
-set(PROJECT_NAME c0dt{{PLUGIN_NAME}})
+set(PROJECT_NAME c0dtPlayground)
 
 # set SOURCE_FILES
 set(SOURCE_FILES
-   c0dt{{PLUGIN_NAME}}.cpp
+   c0dtPlayground.cpp
 )
 
 # set linking libraries
